@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings Management</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    padding:30px;
+}
+
+.settings-container{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:25px;
+}
+
+.sidebar{
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.profile{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.profile img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.profile h3{
+    margin-top:12px;
+}
+
+.profile p{
+    color:#777;
+    font-size:14px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.menu button{
+    border:none;
+    background:#f5f7ff;
+    padding:14px;
+    border-radius:12px;
+    cursor:pointer;
+    text-align:left;
+    font-weight:500;
+    transition:.3s;
+}
+
+.menu button:hover,
+.menu button.active{
+    background:linear-gradient(135deg,#6a5af9,#8f6bff);
+    color:#fff;
+}
+
+.content{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.card h2{
+    margin-bottom:20px;
+    color:#333;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.input-group label{
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:500;
+}
+
+.input-group input,
+.input-group select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+}
+
+.toggle-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.switch{
+    position:relative;
+    width:55px;
+    height:28px;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    cursor:pointer;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#ccc;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.slider:before{
+    position:absolute;
+    content:"";
+    height:22px;
+    width:22px;
+    left:3px;
+    bottom:3px;
+    background:white;
+    border-radius:50%;
+    transition:.3s;
+}
+
+input:checked + .slider{
+    background:#6a5af9;
+}
+
+input:checked + .slider:before{
+    transform:translateX(27px);
+}
+
+.actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    margin-top:20px;
+}
+
+.btn{
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.cancel{
+    background:#ececec;
+}
+
+.save{
+    background:linear-gradient(135deg,#6a5af9,#8f6bff);
+    color:#fff;
+}
+
+@media(max-width:900px){
+    .settings-container{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="settings-container">
+
+    <div class="sidebar">
+        <div class="profile">
+            <img src="https://i.pravatar.cc/150" alt="">
+            <h3>Admin User</h3>
+            <p>System Administrator</p>
+        </div>
+
+        <div class="menu">
+            <button class="active">⚙ General</button>
+            <button>👤 Profile</button>
+            <button>🔒 Security</button>
+            <button>🔔 Notifications</button>
+            <button>🎨 Appearance</button>
+            <button>🌐 Language</button>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="card">
+            <h2>Profile Settings</h2>
+
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" value="Admin User">
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" value="admin@example.com">
+                </div>
+
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="text" value="+91 9876543210">
+                </div>
+
+                <div class="input-group">
+                    <label>Role</label>
+                    <select>
+                        <option>Administrator</option>
+                        <option>Manager</option>
+                        <option>User</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Security Settings</h2>
+
+            <div class="toggle-row">
+                <span>Two-Factor Authentication</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="toggle-row">
+                <span>Login Alerts</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="toggle-row">
+                <span>Session Timeout</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Notification Preferences</h2>
+
+            <div class="toggle-row">
+                <span>Email Notifications</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="toggle-row">
+                <span>SMS Notifications</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="toggle-row">
+                <span>Push Notifications</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="actions">
+                <button class="btn cancel">Cancel</button>
+                <button class="btn save">Save Changes</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
