@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTP Verification</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.container{
+    background:#fff;
+    padding:40px;
+    width:400px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.icon{
+    width:80px;
+    height:80px;
+    margin:auto;
+    background:#eef2ff;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:35px;
+    color:#667eea;
+}
+
+h2{
+    margin-top:20px;
+    color:#333;
+}
+
+p{
+    margin-top:10px;
+    color:#666;
+    font-size:14px;
+}
+
+.otp-box{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:25px 0;
+}
+
+.otp-input{
+    width:50px;
+    height:55px;
+    border:2px solid #ddd;
+    border-radius:12px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+    outline:none;
+    transition:0.3s;
+}
+
+.otp-input:focus{
+    border-color:#667eea;
+    box-shadow:0 0 10px rgba(102,126,234,.3);
+}
+
+.verify-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#667eea;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.verify-btn:hover{
+    background:#5468d4;
+}
+
+.resend{
+    margin-top:20px;
+    font-size:14px;
+    color:#666;
+}
+
+.resend a{
+    color:#667eea;
+    text-decoration:none;
+    font-weight:600;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+.resend a.active{
+    pointer-events:auto;
+    opacity:1;
+}
+
+@media(max-width:450px){
+    .container{
+        width:90%;
+        padding:30px 20px;
+    }
+
+    .otp-input{
+        width:42px;
+        height:50px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="icon">🔒</div>
+
+    <h2>OTP Verification</h2>
+
+    <p>Enter the 6-digit code sent to your mobile/email.</p>
+
+    <div class="otp-box">
+        <input type="text" maxlength="1" class="otp-input">
+        <input type="text" maxlength="1" class="otp-input">
+        <input type="text" maxlength="1" class="otp-input">
+        <input type="text" maxlength="1" class="otp-input">
+        <input type="text" maxlength="1" class="otp-input">
+        <input type="text" maxlength="1" class="otp-input">
+    </div>
+
+    <button class="verify-btn" onclick="verifyOTP()">
+        Verify OTP
+    </button>
+
+    <div class="resend">
+        Resend OTP in <span id="timer">30</span>s
+        <br><br>
+        <a href="#" id="resendLink">Resend OTP</a>
+    </div>
+</div>
+
+<script>
+const inputs = document.querySelectorAll(".otp-input");
+
+inputs.forEach((input,index)=>{
+    input.addEventListener("input",()=>{
+        if(input.value.length === 1 && index < inputs.length-1){
+            inputs[index+1].focus();
+        }
+    });
+
+    input.addEventListener("keydown",(e)=>{
+        if(e.key === "Backspace" &&
+           input.value === "" &&
+           index > 0){
+            inputs[index-1].focus();
+        }
+    });
+});
+
+function verifyOTP(){
+    let otp = "";
+
+    inputs.forEach(input=>{
+        otp += input.value;
+    });
+
+    if(otp.length !== 6){
+        alert("Please enter complete OTP");
+        return;
+    }
+
+    // API Call Example
+    console.log("OTP Submitted:", otp);
+
+    alert("OTP Verified Successfully!");
+}
+
+// Resend Timer
+let time = 30;
+const timer = document.getElementById("timer");
+const resendLink = document.getElementById("resendLink");
+
+const countdown = setInterval(()=>{
+    time--;
+    timer.textContent = time;
+
+    if(time <= 0){
+        clearInterval(countdown);
+        timer.textContent = "0";
+        resendLink.classList.add("active");
+    }
+},1000);
+
+resendLink.addEventListener("click",(e)=>{
+    e.preventDefault();
+
+    if(resendLink.classList.contains("active")){
+        alert("New OTP Sent!");
+        location.reload();
+    }
+});
+</script>
+
+</body>
+</html>

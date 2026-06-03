@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    display:flex;
+    min-height:100vh;
+    background:#f4f7fe;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:260px;
+    background:linear-gradient(180deg,#4f46e5,#7c3aed);
+    color:white;
+    padding:20px;
+    position:fixed;
+    height:100%;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.logo h2{
+    font-size:28px;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    margin:12px 0;
+}
+
+.menu a{
+    text-decoration:none;
+    color:white;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:rgba(255,255,255,0.2);
+}
+
+/* Main */
+
+.main{
+    margin-left:260px;
+    width:100%;
+    padding:25px;
+}
+
+/* Header */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:white;
+    padding:15px 25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.search-box{
+    background:#f4f7fe;
+    padding:10px 15px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.search-box input{
+    border:none;
+    background:transparent;
+    outline:none;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.profile img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+}
+
+/* Cards */
+
+.cards{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.card-icon{
+    width:55px;
+    height:55px;
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:22px;
+}
+
+.blue{background:#4f46e5;}
+.green{background:#10b981;}
+.orange{background:#f59e0b;}
+.red{background:#ef4444;}
+
+.card h3{
+    margin-top:15px;
+    color:#555;
+}
+
+.card h1{
+    margin-top:8px;
+}
+
+/* Table */
+
+.table-section{
+    margin-top:30px;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    text-align:left;
+    padding:15px;
+}
+
+th{
+    background:#f4f7fe;
+}
+
+tr:nth-child(even){
+    background:#fafafa;
+}
+
+.status{
+    padding:6px 12px;
+    border-radius:20px;
+    color:white;
+    font-size:12px;
+}
+
+.active-status{
+    background:#10b981;
+}
+
+.pending{
+    background:#f59e0b;
+}
+
+@media(max-width:768px){
+
+.sidebar{
+    width:80px;
+}
+
+.logo h2,
+.menu span{
+    display:none;
+}
+
+.main{
+    margin-left:80px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">
+        <h2>AdminPro</h2>
+    </div>
+
+    <ul class="menu">
+        <li><a href="#" class="active"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a></li>
+        <li><a href="#"><i class="fas fa-users"></i><span>Users</span></a></li>
+        <li><a href="#"><i class="fas fa-box"></i><span>Products</span></a></li>
+        <li><a href="#"><i class="fas fa-shopping-cart"></i><span>Orders</span></a></li>
+        <li><a href="#"><i class="fas fa-chart-line"></i><span>Analytics</span></a></li>
+        <li><a href="#"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+    </ul>
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search...">
+        </div>
+
+        <div class="profile">
+            <i class="fas fa-bell"></i>
+            <img src="https://i.pravatar.cc/100" alt="">
+        </div>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Total Users</h3>
+                    <h1>12,845</h1>
+                </div>
+                <div class="card-icon blue">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Revenue</h3>
+                    <h1>$48,200</h1>
+                </div>
+                <div class="card-icon green">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Orders</h3>
+                    <h1>3,248</h1>
+                </div>
+                <div class="card-icon orange">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Products</h3>
+                    <h1>856</h1>
+                </div>
+                <div class="card-icon red">
+                    <i class="fas fa-box"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="table-section">
+        <h2>Recent Users</h2>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td><span class="status active-status">Active</span></td>
+            </tr>
+
+            <tr>
+                <td>Sarah Smith</td>
+                <td>sarah@example.com</td>
+                <td><span class="status pending">Pending</span></td>
+            </tr>
+
+            <tr>
+                <td>Michael Lee</td>
+                <td>michael@example.com</td>
+                <td><span class="status active-status">Active</span></td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
